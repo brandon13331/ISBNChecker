@@ -40,29 +40,29 @@ public class ISBN10Checker {
     }
 
     private void setUp() throws NegativeIntegerException {
-        int number = 0;
         for (int i = 0; i < 10; i++) {
-            if (number < 0) {
-                throw new NegativeIntegerException();
-            }
             if (i == 0) {
                 System.out.println("Enter the number for the " + (i + 1) + "st digit");
-                number = scanner.nextInt();
-                isbn.addNumber(i + 1, number);
+                addNumberToISBN(i);
             } else if (i == 1) {
                 System.out.println("Enter the number for the " + (i + 1) + "nd digit");
-                number = scanner.nextInt();
-                isbn.addNumber(i + 1, number);
+                addNumberToISBN(i);
             } else if (i == 2) {
                 System.out.println("Enter the number for the " + (i + 1) + "rd digit");
-                number = scanner.nextInt();
-                isbn.addNumber(i + 1, number);
+                addNumberToISBN(i);
             } else {
                 System.out.println("Enter the number for the " + (i + 1) + "th digit");
-                number = scanner.nextInt();
-                isbn.addNumber(i + 1, number);
+                addNumberToISBN(i);
             }
         }
+    }
+
+    private void addNumberToISBN(int i) throws NegativeIntegerException{
+        int number = scanner.nextInt();
+        if (number < 0) {
+            throw new NegativeIntegerException();
+        }
+        isbn.addNumber(i + 1, number);
     }
 
     private boolean checkValidity() {
