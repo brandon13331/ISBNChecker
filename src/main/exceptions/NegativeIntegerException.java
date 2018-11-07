@@ -1,4 +1,4 @@
 package exceptions;
 
-public class NegativeIntegerException extends Exception {
+public class NegativeIntegerException extends InvalidInputException {
 }
