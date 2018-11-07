@@ -3,7 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ISBN {
+public abstract class ISBN {
     private Map<Integer, Integer> numbers;
 
     public ISBN() {
