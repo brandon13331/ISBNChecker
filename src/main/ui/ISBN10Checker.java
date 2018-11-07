@@ -1,11 +1,12 @@
 package ui;
 
+import exceptions.NegativeIntegerException;
 import model.ISBN;
 import model.ISBN10;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class ISBN10Checker {
     private Scanner scanner;
@@ -23,7 +24,12 @@ public class ISBN10Checker {
             System.out.println("2. Quit");
             operation = scanner.nextInt();
             if (operation == 1) {
-                setUp();
+                try {
+                    setUp();
+                } catch (NegativeIntegerException e) {
+                    System.out.println("Invalid input");
+                    break;
+                }
                 if (checkValidity()) {
                     System.out.println("Your ISBN number is valid");
                 } else
@@ -33,9 +39,12 @@ public class ISBN10Checker {
         }
     }
 
-    private void setUp() {
-        int number;
+    private void setUp() throws NegativeIntegerException {
+        int number = 0;
         for (int i = 0; i < 10; i++) {
+            if (number < 0) {
+                throw new NegativeIntegerException();
+            }
             if (i == 0) {
                 System.out.println("Enter the number for the " + (i + 1) + "st digit");
                 number = scanner.nextInt();
@@ -58,8 +67,8 @@ public class ISBN10Checker {
 
     private boolean checkValidity() {
         int number;
-        Set<Integer> numbers = new HashSet<>();
-        for (int i = 1; i < isbn.getNumbers().size(); i++) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i < isbn.getNumbers().size() + 1; i++) {
             number = i * isbn.getNumbers().get(i);
             numbers.add(number);
         }
@@ -67,8 +76,8 @@ public class ISBN10Checker {
         for (int i : numbers) {
             sum = sum + i;
         }
-        // mod 10
-        if (sum % 10 == 0) {
+        // mod 11
+        if (sum % 11 == 0) {
             return true;
         } else
             return false;
